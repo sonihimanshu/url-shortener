@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <center>
+    <h1>ZipGo : URL Shortener</h1>
+  </center>
+
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    var url = `${window.location.href}shortener`
+    function createShortUrl() {
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: JSON.stringify({
+          originalUrl: document.getElementById("originalUrl").value,
+        }),
+        success: function () {
+          window.location.reload(true);
+        },
+        error: function () {
+          document.getElementById("result").innerHTML = "There is some error";
+        },
+        dataType: "json",
+        contentType: "application/json"
+      });
+    };
+
+    function loadList() {
+      $.getJSON(url, (data) => {
+        var tr = [];
+        for (var i = 0; i < data.length; i++) {
+          tr.push('<tr>');
+          tr.push('<td>' + '<a href=' + data[i].href + '>' + data[i].label + '</a></td>');
+          tr.push('<td>' + new Date(data[i].addedAt).toLocaleString() + '</td>');
+          tr.push('</tr>');
+        };
+
+        $('table').append($(tr.join('')));
+      });
+    };
+
+    $(document).ready(() => {
+      loadList();
+    });   
+  </script>
+</head>
+
+<body bgcolor="lightgray" style="width:100%">
+  <div style="height:600px">
+    <div style="height:95%">
+      <h2>Create Short URL here:</h2>
+
+      <tr>
+        <td>Original Url:</td>
+        <td><input type="text" id="originalUrl"></td>
+        <td> <input value="Submit" type="button" onclick="createShortUrl()"></td>
+        <td>
+          <div id="result"></div>
+        </td>
+      </tr>
+      <br/>
+      <br/>
+      <br/>
+      <h2>Existing Short URLs:</h2>
+      <table border="1" style="width:60%">
+        <tr>
+          <th>Short URL</th>
+          <th>Added At</th>
+        </tr>
+      </table>
+    </div>
+    <div style="height:5%">
+      <center>
+        <h4>By: Himanshu Soni</h4>
+        Email: himanshusoni@hotmail.co.in <br/> Mobile No.: +91 9509 885138
+      </center>
+    </div>
+  </div>
+</body>
+
+
+</html>

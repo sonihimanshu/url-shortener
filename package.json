@@ -1,0 +1,27 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "sample app",
+  "main": "app.js",
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul --include-all-sources cover -x 'app.js' node_modules/.bin/_mocha -- test/api/**/**/*.test.js",
+    "start": "node app.js"
+  },
+  "author": "Himanshu Soni",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.2.18",
+    "node-url-shortener": "^1.0.1",
+    "shorthash": "0.0.2",
+    "url-join": "^4.0.0"
+  },
+  "devDependencies": {
+    "chai-as-promised": "^7.1.1",
+    "sinon": "^6.3.4",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "chai": "^4.2.0",
+    "babel-cli": "^6.26.0"
+  }
+}
